@@ -1,0 +1,4 @@
+.XauthFormContainer {
+    background-color: var(--tertiary-color);
+    min-height: 90vh;
+}

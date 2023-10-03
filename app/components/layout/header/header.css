@@ -1,0 +1,9 @@
+.XnavContainer {
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    background-color: hsl(0deg 0% 100% / 70%);
+    backdrop-filter: blur(1px);
+}
+
+.XnavContainer .XlogoImg {max-width: 50px;}

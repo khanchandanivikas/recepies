@@ -1,0 +1,11 @@
+.XfooterContainer {
+    min-height: 70px;
+    background-color: var(--dark-grey);
+}
+
+.XfooterWrapper {min-height: 70px;}
+
+.XfooterContainer .XsocialIcons a {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}

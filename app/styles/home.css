@@ -1,0 +1,22 @@
+.XsearchContainer {
+    background: linear-gradient(rgba(36,35,35,0.5), rgba(36,35,36,0.5)), url("/images/home/home_banner.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 450px;
+}
+
+.XsearchContainer input {
+    width: 100vw;
+    max-width: 350px;
+}
+
+.XheroImages {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    max-height: 600px;
+}
+
+.XheroImages div:nth-child(1) {grid-row: 1/-1;}
+
+.XheroImages img {height: 100%;}

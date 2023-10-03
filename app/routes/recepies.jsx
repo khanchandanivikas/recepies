@@ -1,0 +1,18 @@
+import { Outlet } from "@remix-run/react";
+import Aside from "../components/aside/Aside";
+import { links as asideStyles } from "../components/aside/Aside";
+
+export function links() {
+  return [...asideStyles()];
+}
+
+const Recepies = () => {
+  return (
+    <div className="default-top">
+      <Aside />
+      <Outlet />
+    </div>
+  );
+};
+
+export default Recepies;

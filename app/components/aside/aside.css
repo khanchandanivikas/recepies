@@ -1,0 +1,6 @@
+#tags-nav .nav-item .bordered-rounded-teritary {
+    border: solid 1px var(--secondary-color);
+    border-radius: 20px;
+    min-width: max-content;
+    padding: 5px 10px;
+}

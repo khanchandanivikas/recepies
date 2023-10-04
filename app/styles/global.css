@@ -37,6 +37,21 @@ img {width: 100%;height: auto;}
     justify-content: center;
 }
 
+/* loader */
+.overlay {
+    position: fixed;
+	width: 100vw;
+	height: 100vh;
+    background: rgba(0,0,0,0.7);
+    z-index: 1;
+}
+.XmainLoader {
+    position: relative;
+    top: 50vh;
+    left: 50%;
+    z-index: 2;
+}
+
 /* overwrite */
 .btn {padding: 0.45rem 1rem !important;max-width: 150px;}
 .btn:hover {opacity: 0.8;}

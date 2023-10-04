@@ -5,14 +5,19 @@ import {
   Scripts,
   ScrollRestoration,
   useMatches,
+  useNavigation
 } from "@remix-run/react";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
+import Spinner from "../ui/Spinner";
 
 export function Document({ title, children }) {
   const matches = useMatches();
 
   const disableJS = matches.some((match) => match.handle?.disableJS);
+
+  const navigation = useNavigation();
+  const isLoading = navigation.state !== 'idle';
 
   return (
     <html lang="en">
@@ -23,6 +28,7 @@ export function Document({ title, children }) {
       </head>
       <body>
         <Header />
+        {isLoading && <Spinner />}
         {children}
         <Footer />
         <ScrollRestoration />

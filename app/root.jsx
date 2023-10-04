@@ -6,6 +6,7 @@ import bootstrapIconsStyles from "bootstrap-icons/font/bootstrap-icons.css";
 import {links as headerStyles} from "./components/layout/header/Header";
 import {links as footerStyles} from "./components/layout/footer/Footer";
 import { Document } from "./components/layout/Document";
+import Error from "./components/utils/Error";
 
 export function links() {
   return [
@@ -28,15 +29,7 @@ export function ErrorBoundary() {
   const error = useRouteError();
 
   // when true, this is what used to go to `CatchBoundary`
-  if (isRouteErrorResponse(error)) {
-    return (
-      <div>
-        <h1>Oops</h1>
-        <p>Status: {error.status}</p>
-        <p>{error.data.message}</p>
-      </div>
-    );
-  }
+  return <Error error={error} />
 }
 
 export default function App() {

@@ -3,3 +3,8 @@
     right: 40px;
     top: 20px;
 }
+
+.XrecepieImageContainer img {
+    max-height: 500px;
+    object-fit: cover;
+}

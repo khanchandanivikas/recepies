@@ -2,6 +2,7 @@ import { useLoaderData } from "@remix-run/react";
 import { json } from '@remix-run/node';
 import { getRecepiesByTag } from "../data/recepies.server";
 import ProductCard from "../components/productCard/ProductCard";
+import NoResult from '../components/utils/NoResult';
 
 export const meta = () => {
   return [
@@ -26,11 +27,7 @@ const RecepiesCategories = () => {
             <ProductCard key={recepie.node.id} link={`/recepie/${recepie.node.id}`} image={recepie.node.mainImage} text={recepie.node.name} />
           );
         })}
-        {!hasRecepies && (
-          <section class="my-4 text-center">
-            <h5>No recepies found</h5>
-          </section>
-        )}
+        {!hasRecepies && <NoResult />}
       </div>
     </section>
   )

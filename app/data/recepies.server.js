@@ -1,5 +1,5 @@
 import { graphqlClient } from "../lib/graphql-client";
-import { GetDefaultRecepies, GetRecepiesByTag, GetRecepieById } from "../queries/recepies";
+import { GetDefaultRecepies, GetRecepiesByTag, GetRecepieById, GetRecepieByName } from "../queries/recepies";
 
 export async function getDefaultRecepies() {
   try {
@@ -27,6 +27,17 @@ export async function getRecepieById(id) {
       id: id
     });
     return data.recipe;
+  } catch (error) {
+    throw new Error('Failed to get recepie.');
+  }
+}
+
+export async function getRecepieByName(name) {
+  try {
+    const data = await graphqlClient.request(GetRecepieByName, {
+      query: name
+    });
+    return data.searchRecipeByNameOrIngredient.onPlan;
   } catch (error) {
     throw new Error('Failed to get recepies.');
   }

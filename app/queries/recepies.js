@@ -24,7 +24,7 @@ export const GetRecepiesByTag = gql`
         }
       }
     }
-}      
+  }      
 `;
 
 export const GetRecepieById = gql`
@@ -53,5 +53,17 @@ export const GetRecepieById = gql`
         iron
       }
     }
-}      
+  }      
+`;
+
+export const GetRecepieByName = gql`
+  query GetRecepieByName($query: String!) {
+    searchRecipeByNameOrIngredient(query: $query) {
+      onPlan {
+        id
+        name
+        mainImage
+      }
+    }
+  }      
 `;

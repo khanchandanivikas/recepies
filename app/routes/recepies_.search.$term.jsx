@@ -1,4 +1,9 @@
+import { useLoaderData } from '@remix-run/react';
+import { json } from '@remix-run/node';
+import { getRecepieByName } from "../data/recepies.server";
 import ProductCard from "../components/productCard/ProductCard";
+import { links as productCardStyles } from "../components/productCard/ProductCard";
+import NoResult from '../components/utils/NoResult';
 
 export const meta = () => {
   return [
@@ -7,16 +12,29 @@ export const meta = () => {
   ];
 };
 
+export function links() {
+  return [...productCardStyles()];
+}
+
+export const loader = async ({params}) => {
+  const data = await getRecepieByName(params.term);
+  return json(data);
+}
+
 const RecepiesSearch = () => {
+  const recepiesSearchList = useLoaderData();
+  const hasSearchResults = recepiesSearchList && recepiesSearchList.length > 0;
+
   return (
-    <section className="container mt-4">
+    <section className="container default-section">
+      <h3 className='text-primary'>Search Results</h3>
       <div className="row">
-        <ProductCard link="/recepie/123" image="https://www.simplyrecipes.com/thmb/pVLKjFHsrQqicitWB6fDPAKQ1RA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Copycat-panera-broccoli-cheddar-soup-LEAD-1-01-122f8ec37b3945a3bd8dff943166f866.jpg" text="Avacado sandwich" />
-        <ProductCard link="/recepie/123" image="https://www.simplyrecipes.com/thmb/pVLKjFHsrQqicitWB6fDPAKQ1RA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Copycat-panera-broccoli-cheddar-soup-LEAD-1-01-122f8ec37b3945a3bd8dff943166f866.jpg" text="Avacado sandwich" />
-        <ProductCard link="/recepie/123" image="https://www.simplyrecipes.com/thmb/pVLKjFHsrQqicitWB6fDPAKQ1RA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Copycat-panera-broccoli-cheddar-soup-LEAD-1-01-122f8ec37b3945a3bd8dff943166f866.jpg" text="Avacado sandwich" />
-        <ProductCard link="/recepie/123" image="https://www.simplyrecipes.com/thmb/pVLKjFHsrQqicitWB6fDPAKQ1RA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Copycat-panera-broccoli-cheddar-soup-LEAD-1-01-122f8ec37b3945a3bd8dff943166f866.jpg" text="Avacado sandwich" />
-        <ProductCard link="/recepie/123" image="https://www.simplyrecipes.com/thmb/pVLKjFHsrQqicitWB6fDPAKQ1RA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Copycat-panera-broccoli-cheddar-soup-LEAD-1-01-122f8ec37b3945a3bd8dff943166f866.jpg" text="Avacado sandwich" />
-        <ProductCard link="/recepie/123" image="https://www.simplyrecipes.com/thmb/pVLKjFHsrQqicitWB6fDPAKQ1RA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Copycat-panera-broccoli-cheddar-soup-LEAD-1-01-122f8ec37b3945a3bd8dff943166f866.jpg" text="Avacado sandwich" />
+        {recepiesSearchList.map((recepie) => {
+          return (
+            <ProductCard key={recepie.id} link={`/recepie/${recepie.id}`} image={recepie.mainImage} text={recepie.name} />
+          );
+        })}
+        {!hasSearchResults && <NoResult />}
       </div>
     </section>
   )

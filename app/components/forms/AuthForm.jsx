@@ -13,10 +13,13 @@ const AuthForm = () => {
     <>
       <Form method="post">
         <div className="form-group mb-2">
-          <input type="email" className="form-control" placeholder="abc@gmail.com" required />
+          <input type="text" className="form-control" name='name' placeholder="username" required />
         </div>
         <div className="form-group mb-2">
-          <input type="password" className="form-control" placeholder="password" required />
+          <input type="email" className="form-control" name='email' placeholder="abc@gmail.com" required />
+        </div>
+        <div className="form-group mb-2">
+          <input type="password" className="form-control" name='password' placeholder="password" required />
         </div>
         <Button text={btnText} />
       </Form>

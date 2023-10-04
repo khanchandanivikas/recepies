@@ -4,7 +4,7 @@ export async function action({ request }) {
   const formData = await request.formData();
   const searchData = Object.fromEntries(formData);
   const searchTerm = searchData.searchTerm;
-  return redirect('/recepies/search/'+searchTerm);
+  return !searchTerm ? redirect('/recepies') : redirect('/recepies/search/'+searchTerm);
 }
 
 export async function loader() {

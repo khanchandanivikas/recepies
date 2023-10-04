@@ -1,0 +1,6 @@
+.XrecepieCard .card-img-top {
+    height: 250px;
+    object-fit: cover;
+}
+
+.XrecepieCard .card-body {min-height: 80px;}

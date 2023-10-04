@@ -1,9 +1,10 @@
 import { Outlet } from "@remix-run/react";
 import Aside from "../components/aside/Aside";
 import { links as asideStyles } from "../components/aside/Aside";
+import { links as productCardStyles } from "../components/productCard/ProductCard";
 
 export function links() {
-  return [...asideStyles()];
+  return [...asideStyles(), ...productCardStyles()];
 }
 
 const Recepies = () => {

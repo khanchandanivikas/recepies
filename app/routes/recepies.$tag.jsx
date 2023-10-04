@@ -1,4 +1,4 @@
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/productCard/ProductCard";
 
 export const meta = () => {
   return [

@@ -9,7 +9,7 @@
     "start": "remix-serve build"
   },
   "dependencies": {
-    "@apollo/client": "^3.8.4",
+    "@apollo/client": "^3.7.0",
     "@remix-run/css-bundle": "^2.0.1",
     "@remix-run/node": "^2.0.1",
     "@remix-run/react": "^2.0.1",
@@ -17,6 +17,8 @@
     "axios": "^1.5.1",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.1",
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0",
     "isbot": "^3.6.8",
     "jquery": "^3.7.1",
     "react": "^18.2.0",

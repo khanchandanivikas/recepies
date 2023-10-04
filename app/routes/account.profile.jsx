@@ -1,4 +1,4 @@
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/productCard/ProductCard";
 
 const ProfilePage = () => {
   return (

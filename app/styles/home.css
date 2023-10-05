@@ -7,8 +7,9 @@
 }
 
 .XsearchContainer input {
-    width: 100vw;
+    width: 100%;
     max-width: 350px;
+    min-width: 250px;
 }
 
 .XheroImages {

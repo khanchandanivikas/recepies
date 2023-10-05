@@ -1,4 +1,4 @@
-import { signup } from "../data/auth.server";
+import { signup, requireUserSession } from "../data/auth.server";
 import styles from "../styles/account.css";
 import AuthForm from "../components/forms/AuthForm";
 import { validateCredentials } from "../helpers/validations";
@@ -10,11 +10,11 @@ export function links() {
 export async function action({ request }) {
   const searchParams = new URL(request.url).searchParams;
   const authMode = searchParams.get('mode') || 'login';
-  // const userId = await requireUserSession(request);
+  const userId = await requireUserSession(request);
 
   const formData = await request.formData();
   const credentials = Object.fromEntries(formData);
-
+  
   // validate form first
   try {
     validateCredentials(credentials);
@@ -26,7 +26,6 @@ export async function action({ request }) {
   if (authMode === 'signup') {
     return await signup(credentials);
   }
-
 }
 
 const Auth = () => {

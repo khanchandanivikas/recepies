@@ -2,12 +2,10 @@ import { graphqlClient } from "../lib/graphql-client";
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { CreateNewUser } from "../mututations/auth";
 
-const SESSION_SECRET = process.env.SESSION_SECRET;
-
 const sessionStorage = createCookieSessionStorage({
   cookie: {
     secure: process.env.NODE_ENV === 'production',
-    secrets: [SESSION_SECRET],
+    secrets: [process.env.SESSION_SECRET],
     sameSite: 'lax',
     maxAge: 30 * 24 * 60 * 60, // 30 days
     httpOnly: true,
@@ -70,7 +68,7 @@ export async function signup({ name, email, password }) {
     if (!user.createUser.success) {
       throw new Error(user.createUser.message)
     }
-    return createUserSession(user.createUser.user.databaseId, '/account/profile');
+    return createUserSession(user.createUser.user.databaseId, '/account/profile'+user.createUser.user.databaseId);
   } catch (error) {
     throw new Error('Failed to create user.');
   }

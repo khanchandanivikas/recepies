@@ -15,16 +15,16 @@ export async function action({ request }) {
   const formData = await request.formData();
   const credentials = Object.fromEntries(formData);
   // validate form first
-  try {
-    return validateCredentials(credentials);
-  } catch (error) {
-    return error;
-  }
+  // try {
+  //   return validateCredentials(credentials);
+  // } catch (error) {
+  //   return error;
+  // }
 
   // // if form is validate sucessfully then signup/login
-  // if (authMode === 'signup') {
-  //   return await signup(credentials);
-  // }
+  if (authMode === 'signup') {
+    return await signup(credentials);
+  }
 }
 
 const Auth = () => {

@@ -68,7 +68,7 @@ export async function signup({ name, email, password }) {
     if (!user.createUser.success) {
       throw new Error(user.createUser.message)
     }
-    return createUserSession(user.createUser.user.databaseId, '/account/profile'+user.createUser.user.databaseId);
+    return createUserSession(user.createUser.user.databaseId, '/account/profile');
   } catch (error) {
     throw new Error('Failed to create user.');
   }

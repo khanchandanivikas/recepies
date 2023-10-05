@@ -14,14 +14,12 @@ export async function action({ request }) {
 
   const formData = await request.formData();
   const credentials = Object.fromEntries(formData);
-  console.log(credentials)
-  return credentials;
   // validate form first
-  // try {
-  //   validateCredentials(credentials);
-  // } catch (error) {
-  //   return error;
-  // }
+  try {
+    return validateCredentials(credentials);
+  } catch (error) {
+    return error;
+  }
 
   // // if form is validate sucessfully then signup/login
   // if (authMode === 'signup') {

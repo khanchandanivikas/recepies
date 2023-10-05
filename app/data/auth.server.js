@@ -5,7 +5,7 @@ import { CreateNewUser } from "../mututations/auth";
 const sessionStorage = createCookieSessionStorage({
   cookie: {
     secure: process.env.NODE_ENV === 'production',
-    secrets: [process.env.SESSION_SECRET],
+    secrets: [process.env.REMIX_APP_SESSION_SECRET],
     sameSite: 'lax',
     maxAge: 30 * 24 * 60 * 60, // 30 days
     httpOnly: true,

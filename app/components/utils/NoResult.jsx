@@ -2,9 +2,9 @@ import React from 'react'
 
 const NoResult = () => {
   return (
-    <section class="my-4 text-center">
+    <div class="alert alert-warning my-4 text-center">
       <h5>No recepies found</h5>
-    </section>
+    </div>
   )
 }
 

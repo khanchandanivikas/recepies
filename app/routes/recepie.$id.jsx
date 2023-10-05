@@ -25,7 +25,7 @@ const MainImage = ({ image, name }) => {
 const NutritionValues = ({ nutrients }) => {
   return (
     <>
-      <h4 className='mt-2'>Nutrition Facts</h4>
+      <h5 className='mt-2'>Nutrition Facts</h5>
       <table className="table">
         <tbody>
           {Object.keys(nutrients).map(function(key) {
@@ -45,7 +45,7 @@ const NutritionValues = ({ nutrients }) => {
 const MainIngredients = ({ ingredients }) => {
   return (
     <>
-      <h4>Main Ingredients</h4>
+      <h5>Main Ingredients</h5>
       <ul>
         {ingredients.map((ingredient) => {
           return <li key={ingredient}>{ingredient}</li>;
@@ -58,7 +58,7 @@ const MainIngredients = ({ ingredients }) => {
 const Instructions = ({ instructionsList }) => {
   return (
     <>
-      <h4>Cooking Instructions</h4>
+      <h5>Cooking Instructions</h5>
       <ol>
         {instructionsList?.map((instruction) => {
           return <li>{instruction}</li>
@@ -76,10 +76,10 @@ const Recepie = () => {
         <section className='default-section'>
           <div className='row'>
             <h1 className="Xtext-primary">{recepieInfo.name}</h1>
-            <div className='col-xs-12 col-sm-8 position-relative XrecepieImageContainer'>
+            <div className='col-sm-8 position-relative XrecepieImageContainer'>
               <MainImage image={recepieInfo.mainImage} name={recepieInfo.name} />
             </div>
-            <div className='col-xs-12 col-sm-4 border'>
+            <div className='col-sm-4 border'>
               <NutritionValues nutrients={recepieInfo.nutritionalInfo} />
               <small>Prep time: {recepieInfo.totalTime}</small>
             </div>

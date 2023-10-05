@@ -7,7 +7,7 @@ export function links() {
 
 const ProductCard = ({ link, image, text }) => {
   return (
-    <div className="col-xs-12 col-sm-4 XrecepieCard">
+    <div className="col-sm-4 XrecepieCard">
       <Link to={link} className="text-decoration-none">
         <div className="card mb-4">
           <img className="card-img-top" src={image} alt={text} title={text} loading="lazy" />

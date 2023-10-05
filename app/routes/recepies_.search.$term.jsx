@@ -27,7 +27,7 @@ const RecepiesSearch = () => {
 
   return (
     <section className="container default-section">
-      <h3 className='text-primary'>Search Results</h3>
+      <h3 className='Xtext-primary'>Search Results</h3>
       <div className="row">
         {recepiesSearchList.map((recepie) => {
           return (

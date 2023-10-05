@@ -75,7 +75,7 @@ const Recepie = () => {
       <div className='row'>
         <section className='default-section'>
           <div className='row'>
-            <h1 className="text-primary">{recepieInfo.name}</h1>
+            <h1 className="Xtext-primary">{recepieInfo.name}</h1>
             <div className='col-xs-12 col-sm-8 position-relative XrecepieImageContainer'>
               <MainImage image={recepieInfo.mainImage} name={recepieInfo.name} />
             </div>

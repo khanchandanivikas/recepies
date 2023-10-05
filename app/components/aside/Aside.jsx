@@ -15,7 +15,7 @@ const Aside = () => {
             {tags.map((tag) => {
               return(
                 <li key={tag} className="nav-item">
-                  <NavLink className={({ isActive }) => isActive ? "nav-link text-primary text-decoration-none bordered-rounded-teritary"  : "text-primary text-decoration-none"} to={`/recepies/${tag}`}>
+                  <NavLink className={({ isActive }) => isActive ? "nav-link Xtext-primary text-decoration-none bordered-rounded-teritary"  : "Xtext-primary text-decoration-none"} to={`/recepies/${tag}`}>
                     {tag}
                   </NavLink>
                 </li>

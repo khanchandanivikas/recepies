@@ -60,4 +60,6 @@ img {width: 100%;height: auto;}
     outline: none !important;
     border: none !important;
 }
+.Xtext-primary {color: var(--primary-color);}
+.Xbg-secondary {background-color: var(--secondary-color);}
 .border-secondary {border-color: var(--secondary-color)}

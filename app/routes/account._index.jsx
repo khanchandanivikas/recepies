@@ -24,8 +24,10 @@ const Auth = () => {
     <section className='default-section XauthFormContainer d-flex align-items-center'>
       <div className='container'>
         <div className='row'>
-          <h3>Get started</h3>
-          <AuthForm />
+          <div className="col-12">
+            <h3>Get started</h3>
+            <AuthForm />
+          </div>
         </div>
       </div>
     </section>

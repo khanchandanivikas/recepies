@@ -11,7 +11,7 @@ const AuthForm = () => {
   const ctaLink = authMode === "login" ? "signup" : "login";
   return (
     <>
-      <Form method="post">
+      <Form method="post" className='my-3'>
         <div className="form-group mb-2">
           <input type="text" className="form-control" name='name' placeholder="username" required />
         </div>
@@ -23,7 +23,7 @@ const AuthForm = () => {
         </div>
         <Button text={btnText} />
       </Form>
-      <Link to={`/account?mode=${ctaLink}`} className='mt-2'>{ctaText}</Link>
+      <Link to={`/account?mode=${ctaLink}`}>{ctaText}</Link>
       {isSubmitting && <span>Submitting...</span>}
     </>
   )

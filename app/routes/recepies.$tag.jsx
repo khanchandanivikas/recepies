@@ -4,10 +4,10 @@ import { getRecepiesByTag } from "../data/recepies.server";
 import ProductCard from "../components/productCard/ProductCard";
 import NoResult from '../components/utils/NoResult';
 
-export const meta = () => {
+export const meta = ({params}) => {
   return [
-    { title: "All recepies by category" },
-    { name: "description", content: "Welcome to my all recepies category page!" },
+    { title: `All recepies of category ${params.tag}` },
+    { name: "description", content: `Welcome to my all recepies category page of ${params.tag}` },
   ];
 };
 

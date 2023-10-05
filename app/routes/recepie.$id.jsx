@@ -4,6 +4,13 @@ import { getRecepieById } from "../data/recepies.server";
 import styles from "../styles/recepie.css";
 import Button from "../components/ui/Button";
 
+export function meta({ params, location, data, parentsData }) {
+  return [
+    { title: `${data.name}` },
+    { name: "description", content: `${data?.cuisines[0]}` },
+  ];
+}
+
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
@@ -61,7 +68,7 @@ const Instructions = ({ instructionsList }) => {
       <h5>Cooking Instructions</h5>
       <ol>
         {instructionsList?.map((instruction) => {
-          return <li>{instruction}</li>
+          return <li key={instruction}>{instruction}</li>
         })}
       </ol>
     </>
@@ -75,7 +82,7 @@ const Recepie = () => {
       <div className='row'>
         <section className='default-section'>
           <div className='row'>
-            <h1 className="Xtext-primary">{recepieInfo.name}</h1>
+            <h1 className="Xtext-primary my-3">{recepieInfo.name}</h1>
             <div className='col-sm-8 position-relative XrecepieImageContainer'>
               <MainImage image={recepieInfo.mainImage} name={recepieInfo.name} />
             </div>

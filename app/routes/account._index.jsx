@@ -1,6 +1,7 @@
 import { signup } from "../data/auth.server";
 import styles from "../styles/account.css";
 import AuthForm from "../components/forms/AuthForm";
+import { validateCredentials } from "../helpers/validations";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
@@ -14,9 +15,18 @@ export async function action({ request }) {
   const formData = await request.formData();
   const credentials = Object.fromEntries(formData);
 
+  // validate form first
+  try {
+    validateCredentials(credentials);
+  } catch (error) {
+    return error;
+  }
+
+  // if form is validate sucessfully then signup/login
   if (authMode === 'signup') {
     return await signup(credentials);
   }
+
 }
 
 const Auth = () => {

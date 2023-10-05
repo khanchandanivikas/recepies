@@ -62,5 +62,5 @@ img {width: 100%;height: auto;}
 }
 .Xtext-primary {color: var(--primary-color) !important;}
 .Xbg-secondary {background-color: var(--secondary-color) !important;}
-.border-secondary {border-color: var(--secondary-color) !important;}
+.Xborder-secondary {border-color: var(--secondary-color) !important;}
 .Xborder-bottom {border-bottom-color: var(--secondary-color) !important;}

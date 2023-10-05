@@ -17,12 +17,12 @@ const Header = () => {
         <nav id="main-nav" className="col-8 nav d-flex justify-content-end align-items-center">
           <ul className="navbar-nav d-flex flex-row gap-4">
             <li className="nav-item">
-              <NavLink className={({ isActive }) => isActive ? "nav-link p-0 Xtext-primary text-decoration-none Xborder-bottom border-secondary"  : "Xtext-primary text-decoration-none"} to="/recepies">
+              <NavLink className={({ isActive }) => isActive ? "nav-link p-0 Xtext-primary text-decoration-none Xborder-bottom Xborder-secondary"  : "Xtext-primary text-decoration-none"} to="/recepies">
                 Recepies
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className={({ isActive }) => isActive ? "nav-link p-0 Xtext-primary text-decoration-none Xborder-bottom border-secondary"  : "Xtext-primary text-decoration-none"} to="/account?mode=login">
+              <NavLink className={({ isActive }) => isActive ? "nav-link p-0 Xtext-primary text-decoration-none Xborder-bottom Xborder-secondary"  : "Xtext-primary text-decoration-none"} to="/account?mode=login">
                 Account
               </NavLink>
             </li>

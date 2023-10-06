@@ -8,5 +8,5 @@ export async function action({ request }) {
 }
 
 export async function loader() {
-  return null
+  return redirect('/recepies');
 }

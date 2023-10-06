@@ -28,7 +28,7 @@ const AuthForm = () => {
       <Link to={`/account?mode=${ctaLink}`}>{ctaText}</Link>
       {isSubmitting && <span>Submitting...</span>}
       {validationErrors && (
-        <ul className='list-unstyled alert alert-warning my-2'>
+        <ul className='list-unstyled alert alert-info my-2'>
           {Object.values(validationErrors).map((error) => (
             <li key={error}>{error}</li>
           ))}

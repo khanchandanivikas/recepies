@@ -1,16 +1,49 @@
+import { useLoaderData, useFetcher, useSubmit } from "@remix-run/react";
+import { json, redirect } from '@remix-run/node';
+import { requireUserSession } from "../data/auth.server";
+import { getUserFavouriteRecepies } from "../data/recepies.server";
+import { links as productCardStyles } from "../components/productCard/ProductCard";
 import ProductCard from "../components/productCard/ProductCard";
+import Button from "../components/ui/Button";
+
+export function links() {
+  return [...productCardStyles()];
+}
+
+export const loader = async ({request}) => {
+  const userId = await requireUserSession(request);
+  if (!userId) return redirect("/account?mode=login");
+  const data = await getUserFavouriteRecepies(userId);
+  return json(data);
+}
 
 const ProfilePage = () => {
+  const recepies = useLoaderData();
+  const fetcher = useFetcher();
+
+  const logout = () => {
+    const proceed = confirm('Are you sure yo want to logout?');
+    if (!proceed) {
+      return;
+    }
+    fetcher.submit(null, { method: 'DELETE', action: '/account/logout' });
+  };
   return (
     <section className="container default-section">
-      <h3>Your Favourite Recepies</h3>
+      <div className="row align-items-center my-3">
+        <div className="col-12 col-sm-6">
+          <h3>Your Favourite Recepies</h3>
+        </div>
+        <div className="col-12 col-sm-6 d-flex justify-content-end align-items-center">
+          <Button click={logout} iconClass="bi bi-box-arrow-right" />
+        </div>
+      </div>
       <div className="row">
-        <ProductCard link="/recepie/123" image="https://www.simplyrecipes.com/thmb/pVLKjFHsrQqicitWB6fDPAKQ1RA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Copycat-panera-broccoli-cheddar-soup-LEAD-1-01-122f8ec37b3945a3bd8dff943166f866.jpg" text="Avacado sandwich" />
-        <ProductCard link="/recepie/123" image="https://www.simplyrecipes.com/thmb/pVLKjFHsrQqicitWB6fDPAKQ1RA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Copycat-panera-broccoli-cheddar-soup-LEAD-1-01-122f8ec37b3945a3bd8dff943166f866.jpg" text="Avacado sandwich" />
-        <ProductCard link="/recepie/123" image="https://www.simplyrecipes.com/thmb/pVLKjFHsrQqicitWB6fDPAKQ1RA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Copycat-panera-broccoli-cheddar-soup-LEAD-1-01-122f8ec37b3945a3bd8dff943166f866.jpg" text="Avacado sandwich" />
-        <ProductCard link="/recepie/123" image="https://www.simplyrecipes.com/thmb/pVLKjFHsrQqicitWB6fDPAKQ1RA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Copycat-panera-broccoli-cheddar-soup-LEAD-1-01-122f8ec37b3945a3bd8dff943166f866.jpg" text="Avacado sandwich" />
-        <ProductCard link="/recepie/123" image="https://www.simplyrecipes.com/thmb/pVLKjFHsrQqicitWB6fDPAKQ1RA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Copycat-panera-broccoli-cheddar-soup-LEAD-1-01-122f8ec37b3945a3bd8dff943166f866.jpg" text="Avacado sandwich" />
-        <ProductCard link="/recepie/123" image="https://www.simplyrecipes.com/thmb/pVLKjFHsrQqicitWB6fDPAKQ1RA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Copycat-panera-broccoli-cheddar-soup-LEAD-1-01-122f8ec37b3945a3bd8dff943166f866.jpg" text="Avacado sandwich" />
+        {recepies.map((recepie) => {
+          return (
+            <ProductCard key={recepie.node.id} link={`/recepie/${recepie.node.id}`} image={recepie.node.mainImage} text={recepie.node.name} />
+          );
+        })}
       </div>
     </section>
   )

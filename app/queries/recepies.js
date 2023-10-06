@@ -67,3 +67,16 @@ export const GetRecepieByName = gql`
     }
   }      
 `;
+
+export const GetUserFavouriteRecepies = gql`{
+    myFavoriteRecipes {
+      edges {
+        node {
+          id
+          name
+          mainImage
+        }
+      }
+    }
+  }    
+`;

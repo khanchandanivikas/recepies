@@ -40,7 +40,7 @@ const Hero = () => {
 export default function Index() {
   return (
     <>
-      <section className="default-section Xalign-center flex-column gap-2 XsearchContainer">
+      <section className="default-section Xalign-center flex-column gap-2 XsearchContainer px-2">
         <h1 className="text-white text-center">The Thatix Recipe Community</h1>
         <SearchForm />
       </section>

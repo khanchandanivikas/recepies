@@ -1,4 +1,5 @@
-import { signup } from "../data/auth.server";
+import { signup, login, getUserFromSession } from "../data/auth.server";
+import { redirect } from '@remix-run/node';
 import styles from "../styles/account.css";
 import AuthForm from "../components/forms/AuthForm";
 import { validateCredentials } from "../helpers/validations";
@@ -10,7 +11,6 @@ export function links() {
 export async function action({ request }) {
   const searchParams = new URL(request.url).searchParams;
   const authMode = searchParams.get('mode') || 'login';
-  // const userId = await requireUserSession(request);
 
   const formData = await request.formData();
   const credentials = Object.fromEntries(formData);
@@ -24,7 +24,15 @@ export async function action({ request }) {
   // // if form is validate sucessfully then signup/login
   if (authMode === 'signup') {
     return await signup(credentials);
+  } else {
+    return await login(credentials);
   }
+}
+
+export const loader = async ({request}) => {
+  const userId = await getUserFromSession(request);
+  if (userId) return redirect('/account/profile/'+userId)
+  return userId;
 }
 
 const Auth = () => {

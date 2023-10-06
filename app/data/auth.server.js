@@ -1,6 +1,7 @@
 import { graphqlClient } from "../lib/graphql-client";
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { CreateNewUser } from "../mututations/auth";
+import axios from "axios";
 
 const sessionStorage = createCookieSessionStorage({
   cookie: {
@@ -61,9 +62,7 @@ export async function requireUserSession(request) {
 export async function signup({ name, email, password }) {
   try {
     const user = await graphqlClient.request(CreateNewUser, {
-      name: name,
-      email: email,
-      password: password
+      name, email, password
     });
     if (!user.createUser.success) {
       throw new Error(user.createUser.message)
@@ -71,5 +70,16 @@ export async function signup({ name, email, password }) {
     return createUserSession(user.createUser.user.databaseId, '/account/profile/'+user.createUser.user.databaseId);
   } catch (error) {
     throw new Error('Failed to create user.');
+  }
+}
+
+export async function login({ name, email, password }) {
+  try {
+    const user = await axios.post("https://production.suggestic.com/api/v1/login", {
+      name, email, password
+    });
+    return createUserSession(user.data.user_id, '/account/profile/'+user.data.user_id);
+  } catch (error) {
+    throw new Error(error.response.data.detail);
   }
 }

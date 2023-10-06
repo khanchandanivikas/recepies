@@ -1,6 +1,6 @@
-import { graphqlClient } from "../lib/graphql-client";
-import { userGraphqlClient } from "../lib/graphql-client";
+import { graphqlClient, userGraphqlClient } from "../lib/graphql-client";
 import { GetDefaultRecepies, GetRecepiesByTag, GetRecepieById, GetRecepieByName, GetUserFavouriteRecepies } from "../queries/recepies";
+import { AddUserFavouriteRecepie } from "../mututations/recepies";
 
 export async function getDefaultRecepies() {
   try {
@@ -22,9 +22,9 @@ export async function getRecepiesByTag(tag) {
   }
 }
 
-export async function getRecepieById(id) {
+export async function getRecepieById(id, user='') {
   try {
-    const data = await graphqlClient.request(GetRecepieById, {
+    const data = await userGraphqlClient(user).request(GetRecepieById, {
       id: id
     });
     return data.recipe;
@@ -50,5 +50,16 @@ export async function getUserFavouriteRecepies(user) {
     return data.myFavoriteRecipes.edges;
   } catch (error) {
     throw new Error('Failed to get recepies.');
+  }
+}
+
+export async function addUserFavouriteRecepie(user, recipeId) {
+  try {
+    const data = await userGraphqlClient(user).request(AddUserFavouriteRecepie, {
+      recipeId
+    });
+    return data.userFavoriteRecipe.success;
+  } catch (error) {
+    throw new Error('Failed to add recepie.');
   }
 }

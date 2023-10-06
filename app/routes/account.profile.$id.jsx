@@ -5,6 +5,7 @@ import { getUserFavouriteRecepies } from "../data/recepies.server";
 import { links as productCardStyles } from "../components/productCard/ProductCard";
 import ProductCard from "../components/productCard/ProductCard";
 import Button from "../components/ui/Button";
+import NoResult from "../components/utils/NoResult";
 
 export function links() {
   return [...productCardStyles()];
@@ -18,7 +19,8 @@ export const loader = async ({request}) => {
 }
 
 const ProfilePage = () => {
-  const recepies = useLoaderData();
+  const favouriteRecepies = useLoaderData();
+  const hasFavouriteRecepies = favouriteRecepies && favouriteRecepies.length > 0;
   const fetcher = useFetcher();
 
   const logout = () => {
@@ -39,11 +41,12 @@ const ProfilePage = () => {
         </div>
       </div>
       <div className="row">
-        {recepies.map((recepie) => {
+        {favouriteRecepies.map((recepie) => {
           return (
             <ProductCard key={recepie.node.id} link={`/recepie/${recepie.node.id}`} image={recepie.node.mainImage} text={recepie.node.name} />
           );
         })}
+        {!hasFavouriteRecepies && <NoResult />}
       </div>
     </section>
   )

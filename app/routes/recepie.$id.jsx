@@ -1,6 +1,7 @@
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useNavigate, useFetcher } from "@remix-run/react";
 import { json } from '@remix-run/node';
-import { getRecepieById } from "../data/recepies.server";
+import { getRecepieById, addUserFavouriteRecepie } from "../data/recepies.server";
+import { getUserFromSession } from "../data/auth.server";
 import styles from "../styles/recepie.css";
 import Button from "../components/ui/Button";
 
@@ -15,16 +16,33 @@ export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
-export const loader = async ({params}) => {
-  const data = await getRecepieById(params.id);
-  return json(data);
+export const loader = async ({params,request}) => {
+  const userId = await getUserFromSession(request);
+  const data = await getRecepieById(params.id,userId);
+  return json({...data, userId});
 }
 
-const MainImage = ({ image, name }) => {
+export async function action({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  const response = await addUserFavouriteRecepie(data.user, data.recipeId);
+  return response;
+}
+
+const MainImage = ({ image, name, favourite, user, recipeId }) => {
+  const fetcher = useFetcher();
+  const navigate = useNavigate();
+  const addFavRecipe = async () => {
+    if (!user) {
+      navigate('/account?mode=login');
+    } else {
+      fetcher.submit({user, recipeId}, { method: 'POST' });
+    }
+  }
   return (
     <>
       <img src={image} className='rounded' alt={name} title={name} />
-      <Button iconClass="bi bi-heart-fill" />
+      <Button click={addFavRecipe} iconClass={favourite ? "bi bi-heart-fill text-danger" : "bi bi-heart-fill"} />
     </>
   );
 }
@@ -84,7 +102,7 @@ const Recepie = () => {
           <div className='row'>
             <h1 className="Xtext-primary my-3">{recepieInfo.name}</h1>
             <div className='col-sm-8 position-relative XrecepieImageContainer'>
-              <MainImage image={recepieInfo.mainImage} name={recepieInfo.name} />
+              <MainImage image={recepieInfo.mainImage} name={recepieInfo.name} favourite={recepieInfo.isUserFavorite} user={recepieInfo.userId} recipeId={recepieInfo.databaseId} />
             </div>
             <div className='col-sm-4 border'>
               <NutritionValues nutrients={recepieInfo.nutritionalInfo} />
